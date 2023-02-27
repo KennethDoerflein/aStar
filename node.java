@@ -9,27 +9,30 @@ public class node implements Comparable<node>{
     public static class Path{
         private int weight;
         private node node;
-
         public Path (int weight, node newNeighbor){
             this.node = newNeighbor;
             this.weight = weight;
         }
-
         public node getNode() {
             return node;
         }
-
         public int getWeight() {
             return weight;
         }
     }
     private node parent = null;
     private char name;
+    private boolean visited;
     private int gValue = -1; // cost of reaching this node from the start node
     private int hValue = -1; // cost of reaching this node from the end node
     private int fValue;
     private ArrayList<Path> neighbors;
 
+    public node(char name) {
+        this.name = name;
+        //this.parents = new ArrayList<node>();
+        this.neighbors = new ArrayList<Path>();
+    }
     public node(char name, int h) {
         this.name = name;
         this.hValue = h;
@@ -78,12 +81,16 @@ public class node implements Comparable<node>{
         Path newPath;
         this.neighbors.add(newPath = new Path(weight,neighbor));
     }
-
-//    public boolean isGoal() {
-//        return this.name == 'g';
-//    }
-
     public node getParent() {
         return parent;
     }
+
+    public boolean isVisited() {
+        return visited;
+    }
+
+    public void setVisited(boolean visited) {
+        this.visited = visited;
+    }
 }
+
